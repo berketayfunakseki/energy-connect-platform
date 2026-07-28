@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "dist",
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": ["ES2022", "DOM"],
+    "resolveJsonModule": true
+  },
+  "include": [
+    "types/**/*.d.ts",
+    "apps/api/src/**/*.ts",
+    "apps/worker/src/**/*.ts",
+    "packages/core/src/**/*.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": ["frontend", "infra/cdk", "node_modules", "dist"]
+}
