@@ -1,0 +1,35 @@
+groups:
+  - name: connect-platform
+    rules:
+      - alert: ConnectApiErrorRateHigh
+        expr: |
+          (connect_http_requests_failed_total / clamp_min(connect_http_requests_total, 1)) > 0.01
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Connect API error ratio above 1%"
+
+      - alert: ConnectApiP95LatencyHigh
+        expr: connect_http_request_duration_ms_p95 > 500
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Connect API p95 latency above 500 ms"
+
+      - alert: ConnectCommandQueueBacklog
+        expr: connect_command_queue_backlog > 100
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Device command queue backlog above 100"
+
+      - alert: ProviderFailureSpike
+        expr: increase(connect_provider_failures_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Energy-provider integration failures increased"
